@@ -1,4 +1,4 @@
-package ru.job4j.iterator;
+package ru.job4j.assertj;
 
 public class Box {
     private static final String UNKNOWN = "Unknown object";

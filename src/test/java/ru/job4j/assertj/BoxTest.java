@@ -1,6 +1,8 @@
-package ru.job4j.iterator;
+package ru.job4j.assertj;
 
 import org.junit.jupiter.api.Test;
+import ru.job4j.assertj.Box;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.BDDAssertions.withPrecision;
 
