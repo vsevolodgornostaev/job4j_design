@@ -46,7 +46,7 @@ class SimpleConvertTest {
         assertThat(array[0]).isLowerCase()
                 .isNotEmpty()
                 .contains("first");
-        assertThat(array[array.length-1].length()).isGreaterThan(3)
+        assertThat(array[array.length - 1].length()).isGreaterThan(3)
                 .isLessThan(5)
                 .isEqualTo(4);
     }
