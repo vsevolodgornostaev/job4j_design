@@ -24,5 +24,4 @@ public class BackwardArrayIterator implements Iterator<Integer> {
         }
         return data[point--];
     }
-
 }
