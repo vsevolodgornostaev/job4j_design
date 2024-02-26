@@ -13,15 +13,10 @@ public class EvenNumbersIterator implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        boolean result = false;
-        for (int i = index; i < data.length; i++) {
-            if (data[i] % 2 == 0) {
-                result = true;
-                index = i;
-                break;
-            }
-        }
-        return result;
+    while (index < data.length - 1 && data[index] % 2 != 0) {
+        index++;
+    }
+        return data.length != index && data[index] % 2 == 0;
     }
 
     @Override
