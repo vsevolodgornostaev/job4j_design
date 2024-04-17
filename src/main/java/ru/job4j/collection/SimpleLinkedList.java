@@ -3,6 +3,7 @@ package ru.job4j.collection;
 import java.util.*;
 
 public class SimpleLinkedList<E> implements SimpleLinked<E> {
+
     private int size;
     private int modCount;
     private Node<E> head;

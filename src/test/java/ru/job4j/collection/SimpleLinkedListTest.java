@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Iterator;
 
 class SimpleLinkedListTest {
-
     private SimpleLinked<Integer> list;
 
     @BeforeEach
