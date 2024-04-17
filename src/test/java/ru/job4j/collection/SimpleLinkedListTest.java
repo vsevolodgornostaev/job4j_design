@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.Iterator;
-import java.util.LinkedList;
 
 class SimpleLinkedListTest {
 
@@ -91,4 +90,29 @@ class SimpleLinkedListTest {
         assertThat(second.hasNext()).isFalse();
     }
 
+    @Test
+    void whenAddElementsThenSizeIncreases() {
+        assertThat(list).hasSize(2);
+        list.add(3);
+        assertThat(list).hasSize(3);
+        list.add(4);
+        assertThat(list).hasSize(4);
+    }
+
+    @Test
+    void whenAddElementsThenGetReturnsCorrectValues() {
+        list.add(3);
+        list.add(4);
+        assertThat(list.get(0)).isEqualTo(1);
+        assertThat(list.get(1)).isEqualTo(2);
+        assertThat(list.get(2)).isEqualTo(3);
+        assertThat(list.get(3)).isEqualTo(4);
+    }
+
+    @Test
+    void testAddNullElement() {
+        list.add(null);
+        assertThat(list).hasSize(3);
+        assertThat(list.get(2)).isNull();
+    }
 }
