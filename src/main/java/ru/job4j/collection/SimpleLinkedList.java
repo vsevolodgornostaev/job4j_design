@@ -34,6 +34,20 @@ public class SimpleLinkedList<E> implements SimpleLinked<E> {
         return node.item;
     }
 
+    public E deleteFirst() {
+        if (head == null) {
+            throw new NoSuchElementException();
+        }
+        E firstItem = head.item;
+        Node<E> nextNode = head.next;
+        head.next = null;
+        head.item = null;
+        head = nextNode;
+        size--;
+        modCount++;
+        return firstItem;
+    }
+
     @Override
     public Iterator<E> iterator() {
         int expectedModCount = modCount;
