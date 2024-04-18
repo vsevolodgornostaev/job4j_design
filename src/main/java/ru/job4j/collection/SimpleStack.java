@@ -6,8 +6,7 @@ public class SimpleStack<T> {
     private SimpleLinked<T> linked = new SimpleLinkedList<T>();
 
     public T pop() {
-        T element = linked.deleteFirst();
-        return element;
+        return linked.deleteFirst();
     }
 
     public void push(T value) {
