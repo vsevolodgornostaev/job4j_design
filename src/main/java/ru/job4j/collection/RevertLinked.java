@@ -1,6 +1,7 @@
 package ru.job4j.collection;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class RevertLinked<T> implements Iterable<T> {
     private Node<T> head;
