@@ -40,7 +40,7 @@ public class ListUtils {
 
     public static <T> void removeAll(List<T> list, List<T> elements) {
         for (T value : elements) {
-            removeIf(list, element -> list.get(0).equals(value));
+            removeIf(list, element -> element.equals(value));
         }
     }
 }
