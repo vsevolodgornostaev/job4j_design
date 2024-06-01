@@ -28,8 +28,7 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
         return result;
     }
 
-    private boolean check(K key) {
-        int index = getIndex(key);
+    private boolean check(K key, int index) {
         return Objects.hashCode(table[index].key) == Objects.hashCode(key)
                     && Objects.equals(table[index].key, key);
     }
@@ -62,7 +61,7 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
         V result = null;
         int index = getIndex(key);
         if (table[index] != null) {
-            if (check(key)) {
+            if (check(key, index)) {
                 result = table[index].value;
             }
         }
@@ -74,7 +73,7 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
         boolean result = false;
         int index = getIndex(key);
         if (table[index] != null) {
-            if (check(key)) {
+            if (check(key, index)) {
                 table[index] = null;
                 result = true;
                 modCount++;
