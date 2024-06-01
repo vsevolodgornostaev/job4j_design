@@ -29,11 +29,11 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     }
 
     private int hash(int hashCode) {
-        return hashCode;
+        return hashCode ^ hashCode >>> 16;
     }
 
     private int indexFor(int hash) {
-        return hash % capacity;
+        return hash & (capacity - 1);
     }
 
     private void expand() {
