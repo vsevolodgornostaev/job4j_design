@@ -18,14 +18,29 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
         if (count == LOAD_FACTOR * capacity) {
             expand();
         }
-        int index = indexFor(hash(Objects.hashCode(key)));
-        if (table[index] == null) {
-            table[index] = new MapEntry<>(key, value);
+        if (table[index(key)] == null) {
+            table[index(key)] = new MapEntry<>(key, value);
             result = true;
             modCount++;
             count++;
         }
         return result;
+    }
+
+    private boolean checkKey(K key) {
+        boolean result = false;
+        if (table[index(key)] != null) {
+            if (Objects.hashCode(table[index(key)].key) == Objects.hashCode(key)
+                    && Objects.equals(table[index(key)].key, key)) {
+
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    private int index(K key) {
+        return indexFor(hash(Objects.hashCode(key)));
     }
 
     private int hash(int hashCode) {
@@ -41,8 +56,7 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
         MapEntry<K, V>[] newTable = new MapEntry[capacity];
         for (MapEntry<K, V> mapEntry : table) {
             if (mapEntry != null) {
-                int index = indexFor(hash(Objects.hashCode(mapEntry.key)));
-                newTable[index] = mapEntry;
+                newTable[index(mapEntry.key)] = mapEntry;
             }
         }
         table = newTable;
@@ -50,31 +64,17 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
 
     @Override
     public V get(K key) {
-        V result = null;
-        int index = indexFor(hash(Objects.hashCode(key)));
-        if (table[index] != null) {
-            if (Objects.hashCode(table[index].key) == Objects.hashCode(key)
-                    && Objects.equals(table[index].key, key)) {
-
-                result = table[index].value;
-            }
-        }
-        return result;
+        return checkKey(key) ? table[index(key)].value : null;
     }
 
     @Override
     public boolean remove(K key) {
         boolean result = false;
-        int index = indexFor(hash(Objects.hashCode(key)));
-        if (table[index] != null) {
-            if (Objects.hashCode(table[index].key) == Objects.hashCode(key)
-                    && Objects.equals(table[index].key, key)) {
-
-                table[index] = null;
-                result = true;
-                modCount++;
-                count--;
-            }
+        if (checkKey(key)) {
+            table[index(key)] = null;
+            result = true;
+            modCount++;
+            count--;
         }
         return result;
     }
