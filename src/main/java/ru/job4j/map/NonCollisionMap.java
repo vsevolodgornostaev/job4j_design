@@ -18,8 +18,9 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
         if (count == LOAD_FACTOR * capacity) {
             expand();
         }
-        if (table[index(key)] == null) {
-            table[index(key)] = new MapEntry<>(key, value);
+        int index = getIndex(key);
+        if (table[index] == null) {
+            table[index] = new MapEntry<>(key, value);
             result = true;
             modCount++;
             count++;
@@ -27,12 +28,13 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
         return result;
     }
 
-    private boolean checkKey(K key) {
-        return Objects.hashCode(table[index(key)].key) == Objects.hashCode(key)
-                    && Objects.equals(table[index(key)].key, key);
+    private boolean check(K key) {
+        int index = getIndex(key);
+        return Objects.hashCode(table[index].key) == Objects.hashCode(key)
+                    && Objects.equals(table[index].key, key);
     }
 
-    private int index(K key) {
+    private int getIndex(K key) {
         return indexFor(hash(Objects.hashCode(key)));
     }
 
@@ -49,7 +51,7 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
         MapEntry<K, V>[] newTable = new MapEntry[capacity];
         for (MapEntry<K, V> mapEntry : table) {
             if (mapEntry != null) {
-                newTable[index(mapEntry.key)] = mapEntry;
+                newTable[getIndex(mapEntry.key)] = mapEntry;
             }
         }
         table = newTable;
@@ -58,9 +60,10 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     @Override
     public V get(K key) {
         V result = null;
-        if (table[index(key)] != null) {
-            if (checkKey(key)) {
-                result = table[index(key)].value;
+        int index = getIndex(key);
+        if (table[index] != null) {
+            if (check(key)) {
+                result = table[index].value;
             }
         }
         return result;
@@ -69,9 +72,10 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     @Override
     public boolean remove(K key) {
         boolean result = false;
-        if (table[index(key)] != null) {
-            if (checkKey(key)) {
-                table[index(key)] = null;
+        int index = getIndex(key);
+        if (table[index] != null) {
+            if (check(key)) {
+                table[index] = null;
                 result = true;
                 modCount++;
                 count--;
