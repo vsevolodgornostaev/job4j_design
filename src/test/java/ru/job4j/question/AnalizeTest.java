@@ -55,6 +55,4 @@ class AnalizeTest {
         Set<User> current = Set.of(new User(1, "AA"), u2, new User(4, "D"));
         assertThat(Analize.diff(previous, current)).isEqualTo(new Info(1, 1, 1));
     }
-
-
 }
