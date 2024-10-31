@@ -3,6 +3,7 @@ package ru.job4j.question;
 import java.util.Objects;
 
 public class Info {
+
     private int added;
     private int changed;
     private int deleted;
