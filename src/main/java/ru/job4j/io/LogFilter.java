@@ -16,9 +16,10 @@ public class LogFilter {
         try (BufferedReader input = new BufferedReader(new FileReader(file))) {
             for (String line = input.readLine(); line != null; line = input.readLine()) {
                 String[] words = line.split(" ");
-                for (int i = words.length - 1; i >= words.length - 2; i--) {
+                for (int i = words.length - 2; i < words.length - 1; i++) {
                     if (words[i].equals("404")) {
                         System.out.println(line);
+                        break;
                     }
                 }
             }
