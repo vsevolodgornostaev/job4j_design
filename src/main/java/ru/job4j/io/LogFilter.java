@@ -1,5 +1,6 @@
 package ru.job4j.io;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.io.*;
@@ -13,17 +14,18 @@ public class LogFilter {
 
     @SuppressWarnings({"checkstyle:EmptyBlock", "checkstyle:EmptyStatement"})
     public List<String> filter() {
+        List<String> filteredList = new ArrayList<>();
         try (BufferedReader input = new BufferedReader(new FileReader(file))) {
             for (String line = input.readLine(); line != null; line = input.readLine()) {
                 String[] words = line.split(" ");
                 if (words[words.length - 2].equals("404")) {
-                    System.out.println(line);
+                    filteredList.add(line);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Collections.emptyList();
+        return filteredList;
     }
 
     public static void main(String[] args) {
