@@ -21,7 +21,7 @@ public class Config {
                         throw new IllegalArgumentException();
                     } else {
                         String[] splitedLine = line.split("=", 2);
-                        if ("".equals(splitedLine[0]) || "".equals(splitedLine[1])) {
+                        if (splitedLine[0].isBlank() || splitedLine[1].isBlank()) {
                             throw new IllegalArgumentException();
                         } else {
                             values.put(splitedLine[0], splitedLine[1]);
