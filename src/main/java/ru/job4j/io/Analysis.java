@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Analysis {
-    public void unavailable(String source, String target) {
+    public static void unavailable(String source, String target) {
         boolean serverIsNotWorking = false;
         String timeServerStoped = null;
         List<String> log = new ArrayList<>();
